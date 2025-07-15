@@ -1,0 +1,18 @@
+Task1. A company application needs a specific version of Apache to be used as web server. Create a Pod with the following conf:
+- Create a namespace called application
+- The Pod should run in the application namespace.
+- Use the paketobuildpacks/httpd image with the 0.7 tag
+- Expose containerPort 80
+
+Steps:
+run: `kubectl create ns application --dry-run=client -o yaml > task1.yml` --> creates namespace application in yaml format and creates task1.yml with content of ns application in yaml format in it. ns is not created yet, code run just in test format because of --dry-run=client 
+
+run: `kubectl run application-pod --image=paketobuildpacks/httpd:0.7 --namespace=application --port=80 -o yaml >> task1.yml` --> we get pod creation in yaml format and append to existing task1.yml file. 
+
+for more clearance separate namespace and pod parts in yml file with three hyphens
+
+run `kubectl apply -f task1.yml`  . ns application and pod application-pod gets created in that namespace. When we run kubectl get pods that pod won't show up thus that was created in application ns. To list that pod specify ns it is located
+
+Overall this task during cont creation will show "RunContainerError" thus the image doesn't have httpd process to run by default. K8s tries to start pod, but container exits because there is nothing to keep it alive, such as HTTPD daemon
+
+Suggestion is to use a different version of apache image

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: app1-dev
+  labels:
+    app: app1
+    env: dev
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app1-pod-1
+  namespace: app1-dev
+  labels:
+    run: app1
+  name: dev
+spec:
+  containers:
+  - image: nginx:latest
+    name: nginx
+    ports:
+    - containerPort: 80
+      protocol: TCP

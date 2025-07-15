@@ -1,0 +1,11 @@
+Cloud Engineering team wants to deploy their application to Kubernetes cluster that you manage. However, they would like to have their own Namespace and use their Service Account.
+- Create a namespace called cloud-engineering
+- Create a service account called cloud-engineers in cloud engineering namespace
+- Create a simple deployment called internal-app in default namespace
+- Update the internal-app deployment in the default namespace to run it the cloud-engineering namespace and run as the cloud-engineers service account.
+
+Steps: 
+1. Run `kubectl create ns cloud-engineering --dry-run=client -o yaml > task2.yml`
+2. `kubectl create sa cloud-engineers -n=cloud-engineering -o yaml >> task2.yml`
+3. `kubectl create deploy internal-app -n=default` --> anyways it creates in deflt ns, if we dont specify it, but I want to update its ns in next step. Deployment has been created.
+4. Edit yaml file for deployment to run in cloud-engineering ns and as cloud-engineers sa. Then run `kubectl apply -f task2.yml`. Configurations will be applied. Thus we updated deployment and internal-app deploy remains in default ns, run `kubectl delete deploy internal-app`.
