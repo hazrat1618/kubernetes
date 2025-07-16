@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: application-probe
+  labels:
+    run: application-probe
+spec:
+  containers:
+  - name: application-probe
+    image: nginx
+    ports:
+    - containerPort: 5000
+    readinessProbe:
+      httpGet:
+        path: /started
+        port: 5000
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      failureThreshold: 3
+    livenessProbe:
+      httpGet: 
+        path: /health
+        port: 5000
+      initialDelaySeconds: 15
+      periodSeconds: 10
+      failureThreshold: 3

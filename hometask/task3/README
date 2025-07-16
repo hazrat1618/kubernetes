@@ -1,0 +1,11 @@
+As part of application teams requirements, you want to have a couple endpoints configured in the Pod. Kubernetes restarts the Pod when an endpoints returns 500 Error on the /health endpoint.
+
+- Create a Pod named application-probe with nginx image
+-The application has an endpoint, /started , this endpoint returns 200 Error if the application is ready to receive traffic. If the endpoint returns 500 Error, the application has not yet finished initialization.
+- The application has another endpoint, /health , this endpoints returns 200 Error if the application is still working as expected. If the endpoint returns 500 Error, the application is no longer available
+- Configure application-probe pod to use these endpoints
+- The probes should be using port 5000
+
+Steps:
+- Run `kubectl run application-probe --image=nginx --port=5000 --dry-run=client -o yaml > task3.yml`. By deflt nginx listens to port 80
+- Edit yaml file and add readinessProbe with endpoint /started and livenessProbe with endpoint /health. Specify in both initialDelaySeconds, periodSeconds and failureThreshold

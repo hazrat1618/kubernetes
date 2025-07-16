@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: akumo-pod
+  name: akumo-pod
+spec:
+  containers:
+  - image: busybox
+    name: akumo-container
+    command: ["/bin/sh"]
+    args: ["-c", "sleep 5000"]
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always

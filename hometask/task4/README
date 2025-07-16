@@ -1,0 +1,7 @@
+Deploy the pi-pod with the following YAML file:
+Retrieve available logs from the pod and store them in $(pwd)/pi-logs.txt
+
+Steps:
+- copy and paste yaml file. run `kubectl apply -f task4.yml`. 
+- wait for the status to get completed. run `kubectl logs pi > $(pwd)/pi-logs.txt`
+- verify logs by runnign `cat pi-logs.txt`

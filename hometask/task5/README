@@ -1,0 +1,17 @@
+Create a Pod with the following configurations and instructions:
+
+Create a YAML formatted pod manifest $(pwd)/pod.yaml
+Pod Name: akumo-pod
+Container Name: akumo-container
+Image Name: busybox
+Command Line Arguments: /bin/sh -c sleep 5000
+Create the pod with Kubectl command using the YAML file
+After the pod starts running, get summary data about the pod in JSON format and create the output to a file called $(pwd)/out.json
+Note: only use args not command
+
+Steps:
+- run `kubectl run akumo-pod --image=busybox --dry-run=client -o yaml > task5.yml`
+- edit the container name to akumo-container
+- in yaml file add under spec: containers: command and args
+- run `kubectl apply -f task5.yml`
+- to get summary data in json format run `kubectl get pod akumo-pod -o json > $(pwd)/out.json
