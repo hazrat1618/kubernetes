@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-volume-pod
+spec:
+  volumes:
+  - name: hostpath-volume
+    # mount /tmp, but only if that directory already exists
+    hostPath:
+      path: /tmp # directory location on host
+  containers:
+  - name: hostpath-volume-pod
+    image: nginx
+    volumeMounts:
+    - mountPath: /foo   # Container Path
+      name: hostpath-volume
+      readOnly: true  
